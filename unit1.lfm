@@ -1,12 +1,12 @@
 object Form1: TForm1
   Left = 802
-  Height = 461
+  Height = 448
   Top = 496
-  Width = 548
+  Width = 528
   BorderStyle = bsSingle
   Caption = 'MMBN5M'
-  ClientHeight = 461
-  ClientWidth = 548
+  ClientHeight = 448
+  ClientWidth = 528
   Font.CharSet = ANSI_CHARSET
   Font.Height = -16
   Font.Pitch = fpVariable
