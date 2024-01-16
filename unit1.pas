@@ -102,6 +102,8 @@ var
   process_list: TStrings;
   room: smallint = -1; // contains current room 16-bit value
   last_room: smallint = -1;
+  room_name: string;
+  new_room: bool;
 
 {$R *.lfm}
 
@@ -165,8 +167,6 @@ begin
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
-var
-  room_name: string;
 begin
 
   if hProcess <> 0 then
@@ -174,8 +174,9 @@ begin
     try
       if ReadMemory(hProcess, Pointer($80205FF4), room, SizeOf(room)) then
       begin
-        if last_room <> room then
+        if (last_room <> room) or (new_room) then
         begin
+          new_room := false;
           last_room := room;
           room_name := ROOMS.ReadString('Rooms', IntToStr(room), 'Unknown');
           room_name_label.Caption := 'Room #' + IntToStr(room) + ': ' + room_name;
@@ -205,10 +206,12 @@ procedure TForm1.edit_room_buttonClick(Sender: TObject);
 var
   new_room_name: string;
 begin
+  new_room_name := room_name;
   if InputQuery('Editing Room # ' + IntToStr(room), 'Enter this Room''s name',
     new_room_name) then
   begin
     ROOMS.WriteString('Rooms', IntToStr(room), new_room_name);
+    new_room := true;
   end;
 end;
 
