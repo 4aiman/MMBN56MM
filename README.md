@@ -36,12 +36,12 @@ Assets are *not* included. Because...
 >
 > We can argue all day about whether coding something means I can tell you what to do. Especially when the app in question uses assets made by other people and is useless without those.
 >
-> The same goes for the images. Yes, [Mega Boy](mailto:megaboy@sympatico.ca) did create the images used in this app, but does he own them? Can he (or Dr. Cossack's for that sake) grant *any* persmissions regading Capcom's assets?
+> The same goes for the images. Yes, [Mega Boy](mailto:megaboy@sympatico.ca) did create the images used in this app, but does he own them? Can he (or Dr. Cossack for that sake) grant *any* persmissions regading Capcom's assets?
 >
 > Don't think so.
 >
 > It's not hard to ask, but I don't feel like there's any reason to.
 >
-> Dumping something from a game sure requires an investment of time - just as crating this app and writing this readme does. But neither act magically makes any of use the owner of those assets. At best it's a derivative work akin fan art.
+> Dumping something from a game sure requires an investment of time - just as crating this app and writing this readme does. But neither of those acts magically makes any of us the owner of the assets in question. At best it's a derivative work akin fan art.
 >
-> If there's anyone to ask that would be Capcom themselves. And we all know what they think (see [III. IMPERMISSIBLE USES](https://www.capcomusa.com/video-policy/)). Be happy Capcom doesn't enforce its rights and allows us to to what we do
+> If there's anyone to ask, that would be Capcom themselves. And we all know what they think (see [III. IMPERMISSIBLE USES](https://www.capcomusa.com/video-policy/)). Be happy Capcom doesn't enforce its rights and allows us to to what we do
