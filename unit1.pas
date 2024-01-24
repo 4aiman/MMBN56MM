@@ -6,14 +6,18 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Buttons, IniFiles;
+  Buttons, Grids, IniFiles;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    plus_spoil: TButton;
     edit_room_button: TButton;
+    minus_spoil1: TButton;
+    spoils_label: TLabel;
+    spoils_listbox: TListBox;
     map_image: TImage;
     room_name_label: TLabel;
     start_stop_button: TSpeedButton;
@@ -22,6 +26,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure map_imagePaint(Sender: TObject);
+    procedure minus_spoil1Click(Sender: TObject);
+    procedure plus_spoilClick(Sender: TObject);
+    procedure spoils_listboxDblClick(Sender: TObject);
     procedure start_stop_buttonClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
@@ -104,6 +111,8 @@ var
   last_room: smallint = -1;
   room_name: string;
   new_room: bool;
+  spoils_list: string;
+  spoils: TStringArray;
 
 {$R *.lfm}
 
@@ -114,6 +123,7 @@ begin
   // open ini file and create a list to hold processes
   ROOMS := TIniFile.Create('rooms.ini');
   process_list := TStringList.Create();
+  spoils_listbox.Height := 0;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -131,8 +141,79 @@ end;
 
 procedure TForm1.map_imagePaint(Sender: TObject);
 begin
-  map_image.Canvas.Brush.Style := bsClear;
-  map_image.Canvas.Rectangle(0, 0, 400, 400);
+  //map_image.Canvas.Brush.Style := bsClear;
+  //map_image.Canvas.Rectangle(0, 0, 400, 400);
+end;
+
+procedure TForm1.minus_spoil1Click(Sender: TObject);
+var
+  Txt: string;
+  i: integer;
+begin
+  if (spoils_listbox.ItemIndex > -1) then
+  begin
+    spoils_listbox.Items.Delete(spoils_listbox.ItemIndex);
+    for i := 0 to spoils_listbox.Items.Count - 1 do
+    begin
+      if i < spoils_listbox.Items.Count - 1 then
+        Txt := Txt + spoils_listbox.Items[i] + ','
+      else
+        Txt := Txt + spoils_listbox.Items[i];
+    end;
+    ROOMS.WriteString('Spoils', IntToStr(room), Txt);
+  end;
+  spoils_listbox.ClearSelection;
+end;
+
+procedure TForm1.plus_spoilClick(Sender: TObject);
+var
+  new_spoil_name: string;
+var
+  Txt: string;
+  i: integer;
+begin
+  if InputQuery('Adding item to Room #' + IntToStr(room), 'Enter item''s name',
+    new_spoil_name) then
+  begin
+    spoils_listbox.Items.Add(new_spoil_name);
+    for i := 0 to spoils_listbox.Items.Count - 1 do
+    begin
+      if i < spoils_listbox.Items.Count - 1 then
+        Txt := Txt + spoils_listbox.Items[i] + ','
+      else
+        Txt := Txt + spoils_listbox.Items[i];
+    end;
+    ROOMS.WriteString('Spoils', IntToStr(room), Txt);
+  end;
+  spoils_listbox.ClearSelection;
+end;
+
+procedure TForm1.spoils_listboxDblClick(Sender: TObject);
+var
+  new_spoil_name: string;
+var
+  Txt: string;
+  i: integer;
+begin
+  if (spoils_listbox.ItemIndex > -1) then
+  begin
+    new_spoil_name := spoils_listbox.Items[spoils_listbox.ItemIndex];
+    if InputQuery('Editing item in Room #' + IntToStr(room),
+      'Enter item''s name', new_spoil_name) then
+    begin
+      spoils_listbox.Items[spoils_listbox.ItemIndex] := new_spoil_name;
+      for i := 0 to spoils_listbox.Items.Count - 1 do
+      begin
+        if i < spoils_listbox.Items.Count - 1 then
+          Txt := Txt + spoils_listbox.Items[i] + ','
+        else
+          Txt := Txt + spoils_listbox.Items[i];
+      end;
+      ROOMS.WriteString('Spoils', IntToStr(room), Txt);
+
+    end;
+  end;
+  spoils_listbox.ClearSelection;
 end;
 
 procedure TForm1.start_stop_buttonClick(Sender: TObject);
@@ -168,6 +249,8 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
+  spoils_listbox.Height := spoils_listbox.Items.Count * spoils_listbox.ItemHeight;
+
 
   if hProcess <> 0 then
   begin
@@ -176,10 +259,18 @@ begin
       begin
         if (last_room <> room) or (new_room) then
         begin
-          new_room := false;
+          new_room := False;
           last_room := room;
           room_name := ROOMS.ReadString('Rooms', IntToStr(room), 'Unknown');
           room_name_label.Caption := 'Room #' + IntToStr(room) + ': ' + room_name;
+          spoils_list := ROOMS.ReadString('Spoils', IntToStr(room), '');
+          spoils_listbox.Items.Clear;
+          if (spoils_list <> '') then
+          begin
+            spoils := spoils_list.Split(',');
+            spoils_listbox.Items.AddStrings(spoils);
+          end;
+
           if FileExists('images/' + room_name + '.png') then
           begin
             map_image.Picture.LoadFromFile('images/' + room_name + '.png');
@@ -192,11 +283,11 @@ begin
       end
       else
       begin
-        room_name_label.Caption := 'error';
+        room_name_label.Caption := 'Error. Make sure the game is running';
       end;
     except
       on edit_room_button: Exception do
-        room_name_label.Caption := 'error';
+        room_name_label.Caption := 'Error';
     end;
   end;
 
@@ -211,7 +302,7 @@ begin
     new_room_name) then
   begin
     ROOMS.WriteString('Rooms', IntToStr(room), new_room_name);
-    new_room := true;
+    new_room := True;
   end;
 end;
 
