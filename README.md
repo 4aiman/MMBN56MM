@@ -36,7 +36,7 @@ Assets are *not* included. Because...
 >
 > We can argue all day about whether coding something means I can tell you what to do. Especially when the app in question uses assets made by other people and is useless without those.
 >
-> The same goes for the images. Yes, [Mega Boy](megaboy@sympatico.ca) did create the images used in this app, but does he own them? Can he (or Dr. Cossack's for that sake) grant *any* persmissions regading Capcom's assets?
+> The same goes for the images. Yes, [Mega Boy](mailto:megaboy@sympatico.ca) did create the images used in this app, but does he own them? Can he (or Dr. Cossack's for that sake) grant *any* persmissions regading Capcom's assets?
 >
 > Don't think so.
 >
