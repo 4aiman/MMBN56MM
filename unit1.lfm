@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 1033
+  Left = 1657
   Height = 448
-  Top = 463
+  Top = 313
   Width = 528
   Caption = 'MMBN5M'
   ClientHeight = 448
@@ -11,8 +11,8 @@ object Form1: TForm1
   Font.Name = 'Liberation Mono'
   Font.Pitch = fpFixed
   Font.Quality = fqDraft
+  OnClose = FormClose
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   Position = poScreenCenter
   LCLVersion = '2.2.6.0'
   object room_name_label: TLabel
@@ -152,6 +152,25 @@ object Form1: TForm1
     Caption = '-'
     OnClick = minus_spoil1Click
     TabOrder = 3
+  end
+  object map_stretch_checkbox: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = spoils_listbox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = map_image
+    AnchorSideBottom.Control = plus_spoil
+    Left = 8
+    Height = 22
+    Top = 370
+    Width = 120
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Caption = 'Stretch'
+    OnChange = map_stretch_checkboxChange
+    TabOrder = 4
   end
   object Timer1: TTimer
     Enabled = False

@@ -15,6 +15,10 @@ The images were taken from [Dr. Cossack's Lab](https://www.interordi.com/mega_ma
 - Use `Start`/`Stop` button to enable/disable memory reading.
 - If you encounter an `Unknown` Room - press `Edit` it and give it a name.
 - The name you've given will be used when loading images, e.g. when you're in the `Lan's Room`, the app will try to load `./images/Lan's Room.png` image.
+- Use `+`/`-` buttons to add/delete spoils list found in room (blue, gree, purple mystery data, lotto codes etc)
+- Double click spoil item to edit it
+- Use `Stretch` checkbox if you want your map stretched (usefull for those streaming people)
+- Use `Win`+`Y` global hotkey to toggle fullscreen (conflicts with mixed reality shortcut, not configurable atm)
 
 The app should work under a regular user ***do not*** give this app (and 99.9% of all the other apps) admin privs
 

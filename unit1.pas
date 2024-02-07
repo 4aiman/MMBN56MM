@@ -6,13 +6,23 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Buttons, Grids, IniFiles;
+  Buttons, Grids, IniFiles, Windows;
+
+type
+  TWMHotKey = packed record
+    MSG: cardinal;
+    HotKey: PtrInt;
+    Unused: PtrInt;
+    Result: PtrInt;
+  end;
+
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    map_stretch_checkbox: TCheckBox;
     plus_spoil: TButton;
     edit_room_button: TButton;
     minus_spoil1: TButton;
@@ -23,9 +33,10 @@ type
     start_stop_button: TSpeedButton;
     Timer1: TTimer;
     procedure edit_room_buttonClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure map_imagePaint(Sender: TObject);
+    procedure map_stretch_checkboxChange(Sender: TObject);
     procedure minus_spoil1Click(Sender: TObject);
     procedure plus_spoilClick(Sender: TObject);
     procedure spoils_listboxDblClick(Sender: TObject);
@@ -35,6 +46,9 @@ type
 
   public
 
+  protected
+    procedure WMHotKey(var MSG: TWMHotKey); message WM_HOTKEY;
+
   end;
 
 var
@@ -43,7 +57,7 @@ var
 implementation
 
 
-uses Windows, JwaTlHelp32;
+uses JwaTlHelp32;
 
 function FindProcessID(const ExeFileName: string): DWORD;
 var
@@ -113,6 +127,11 @@ var
   new_room: bool;
   spoils_list: string;
   spoils: TStringArray;
+  fullscreen_map: bool = False;
+
+var
+  x, y, w, h: integer;
+  state: TWindowState;
 
 {$R *.lfm}
 
@@ -124,25 +143,19 @@ begin
   ROOMS := TIniFile.Create('rooms.ini');
   process_list := TStringList.Create();
   spoils_listbox.Height := 0;
-end;
-
-procedure TForm1.FormDestroy(Sender: TObject);
-begin
-  //  close the process on exit if it's been opened
-  if start_stop_button.Down = True then
-  begin
-    Timer1.Enabled := False;
-    CloseHandle(hProcess);
-  end;
-  // free additionally created objects
-  ROOMS.Free;
-  process_list.Free;
+  if not RegisterHotKey(Handle, 111000, MOD_WIN, VK_Y) then
+    ShowMessage('HotKey registration failed. You won''t be able to press Win+Y to temporarily view map in full screen.');
 end;
 
 procedure TForm1.map_imagePaint(Sender: TObject);
 begin
   //map_image.Canvas.Brush.Style := bsClear;
   //map_image.Canvas.Rectangle(0, 0, 400, 400);
+end;
+
+procedure TForm1.map_stretch_checkboxChange(Sender: TObject);
+begin
+  map_image.Proportional := not map_stretch_checkbox.Checked;
 end;
 
 procedure TForm1.minus_spoil1Click(Sender: TObject);
@@ -304,6 +317,55 @@ begin
     ROOMS.WriteString('Rooms', IntToStr(room), new_room_name);
     new_room := True;
   end;
+end;
+
+procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  //  close the process on exit if it's been opened
+  if start_stop_button.Down = True then
+  begin
+    Timer1.Enabled := False;
+    CloseHandle(hProcess);
+  end;
+  // free additionally created objects
+  ROOMS.Free;
+  process_list.Free;
+  UnregisterHotKey(Handle, 111000);
+end;
+
+
+procedure TForm1.WMHotKey(var MSG: TWMHotKey);
+begin
+  fullscreen_map := not fullscreen_map;
+  Form1.Caption := (BoolToStr(fullscreen_map));
+  Form1.Visible := False;
+  if (fullscreen_map = True) then
+  begin
+    x := Form1.Left;
+    y := Form1.top;
+    w := Form1.Width;
+    h := Form1.Height;
+    state := Form1.WindowState;
+    Form1.FormStyle := fsStayOnTop;
+    Form1.BorderStyle := bsNone;
+    Form1.Left := 0;
+    Form1.Top := 0;
+    form1.Width := Screen.Width;
+    Form1.Height := Screen.Height;
+  end
+  else
+  begin
+    Form1.FormStyle := fsNormal;
+    Form1.BorderStyle := bsSingle;
+    Form1.Left := x;
+    Form1.Top := y;
+    form1.Width := w;
+    Form1.Height := h;
+    Form1.WindowState := state;
+  end;
+  Form1.Visible := True;
+  RegisterHotKey(Handle, 111000, MOD_WIN, VK_Y);
+
 end;
 
 end.
