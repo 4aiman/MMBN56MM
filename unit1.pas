@@ -337,7 +337,7 @@ end;
 procedure TForm1.WMHotKey(var MSG: TWMHotKey);
 begin
   fullscreen_map := not fullscreen_map;
-  Form1.Caption := (BoolToStr(fullscreen_map));
+
   Form1.Visible := False;
   if (fullscreen_map = True) then
   begin
@@ -345,6 +345,7 @@ begin
     y := Form1.top;
     w := Form1.Width;
     h := Form1.Height;
+    Application.ProcessMessages;
     state := Form1.WindowState;
     Form1.FormStyle := fsStayOnTop;
     Form1.BorderStyle := bsNone;
@@ -355,13 +356,16 @@ begin
   end
   else
   begin
+    Form1.WindowState := state;
     Form1.FormStyle := fsNormal;
-    Form1.BorderStyle := bsSingle;
+    Form1.BorderStyle := bsSizeable;
+    Application.ProcessMessages;
+    Form1.Position:=poDesigned;
     Form1.Left := x;
     Form1.Top := y;
     form1.Width := w;
     Form1.Height := h;
-    Form1.WindowState := state;
+
   end;
   Form1.Visible := True;
   RegisterHotKey(Handle, 111000, MOD_WIN, VK_Y);
