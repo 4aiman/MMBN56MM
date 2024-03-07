@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 1657
+  Left = 1066
   Height = 448
-  Top = 313
-  Width = 528
-  Caption = 'MMBN5M'
+  Top = 323
+  Width = 606
+  Caption = 'MMBN5-6M'
   ClientHeight = 448
-  ClientWidth = 528
+  ClientWidth = 606
   Font.CharSet = ANSI_CHARSET
   Font.Height = -16
   Font.Name = 'Liberation Mono'
@@ -19,7 +19,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = start_stop_button
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 136
+    Left = 192
     Height = 18
     Top = 8
     Width = 320
@@ -38,10 +38,10 @@ object Form1: TForm1
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 136
+    Left = 192
     Height = 406
     Top = 34
-    Width = 384
+    Width = 406
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 8
     BorderSpacing.Right = 8
@@ -53,11 +53,12 @@ object Form1: TForm1
   end
   object start_stop_button: TSpeedButton
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Owner
+    AnchorSideTop.Control = gamebox
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 30
-    Top = 8
-    Width = 120
+    Top = 40
+    Width = 176
     AllowAllUp = True
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
@@ -73,8 +74,8 @@ object Form1: TForm1
     AnchorSideRight.Control = map_image
     Left = 8
     Height = 30
-    Top = 46
-    Width = 120
+    Top = 78
+    Width = 176
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
@@ -91,8 +92,8 @@ object Form1: TForm1
     AnchorSideBottom.Control = plus_spoil
     Left = 8
     Height = 250
-    Top = 110
-    Width = 120
+    Top = 142
+    Width = 176
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
@@ -111,8 +112,8 @@ object Form1: TForm1
     AnchorSideRight.Control = map_image
     Left = 8
     Height = 18
-    Top = 84
-    Width = 120
+    Top = 116
+    Width = 176
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
@@ -144,7 +145,7 @@ object Form1: TForm1
     Left = 72
     Height = 40
     Top = 400
-    Width = 56
+    Width = 112
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Left = 8
     BorderSpacing.Right = 8
@@ -162,7 +163,7 @@ object Form1: TForm1
     Left = 8
     Height = 22
     Top = 370
-    Width = 120
+    Width = 176
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
@@ -171,6 +172,32 @@ object Form1: TForm1
     Caption = 'Stretch'
     OnChange = map_stretch_checkboxChange
     TabOrder = 4
+  end
+  object gamebox: TComboBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = start_stop_button
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = start_stop_button
+    Left = 8
+    Height = 24
+    Top = 8
+    Width = 176
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 8
+    ItemHeight = 18
+    ItemIndex = 0
+    Items.Strings = (
+      'MMBN 5'
+      'MMBN 6'
+    )
+    OnSelect = gameboxSelect
+    ReadOnly = True
+    Style = csOwnerDrawFixed
+    TabOrder = 5
+    Text = 'MMBN 5'
   end
   object Timer1: TTimer
     Enabled = False

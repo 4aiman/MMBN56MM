@@ -5,7 +5,7 @@
     <PathDelim Value="\"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="mmbn5mm"/>
+      <Title Value="mmbn56mm"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
@@ -17,10 +17,10 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <MinorVersionNr Value="1"/>
-      <RevisionNr Value="5"/>
+      <MinorVersionNr Value="2"/>
       <BuildNr Value="18"/>
       <Attributes pvaPrivateBuild="True"/>
+      <StringTable CompanyName="4aiman" FileDescription="Megaman Battle Network 5 and 6 minimap app" InternalName="mmbn56mm" LegalCopyright="4aiman" OriginalFilename="mmbn56mm" ProductName="MMBN56MM" ProductVersion="2"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Debug" Default="True"/>
@@ -95,6 +95,9 @@
       </Item>
       <Item>
         <Name Value="EFOpenError"/>
+      </Item>
+      <Item>
+        <Name Value="EConvertError"/>
       </Item>
     </Exceptions>
   </Debugging>
