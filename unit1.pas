@@ -343,6 +343,7 @@ begin
 	new_room_name := room_name;
 	if InputQuery ( 'Editing Room # ' + IntToStr ( room ), 'Enter this Room''s name', new_room_name ) then begin
 		ROOMS.WriteString ( 'Rooms ' + current_game, IntToStr ( room ), new_room_name );
+        last_room := -1;
 	end;
 end;
 
