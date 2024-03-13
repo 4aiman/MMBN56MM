@@ -1,4 +1,4 @@
-# Megaman Battle Network 5 Mini Map App
+# Megaman Battle Network 5 and 6 Mini Map App
 
 This app is a Windows only tool that reads MMBN Legacy Collection 2's memory and grabs current map ID from that.
 
@@ -10,7 +10,7 @@ The images were taken from [Dr. Cossack's Lab](https://www.interordi.com/mega_ma
 # How to use
 
 - Open the legacy collection 2
-- Load up MMBN 5 (tested with Team Protoman)
+- Load up MMBN 5 (tested with Team Protoman) or MMBN6 (tested with Cyberbeast Falzar)
 - Open this app
 - Use `Start`/`Stop` button to enable/disable memory reading.
 - If you encounter an `Unknown` Room - press `Edit` it and give it a name.
