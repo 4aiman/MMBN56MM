@@ -1,0 +1,13 @@
+{"version":1,"strings":[
+{"hash":24216973,"name":"tform1.caption","sourcebytes":[77,77,66,78,53,45,54,77],"value":"MMBN5-6M"},
+{"hash":223940658,"name":"tform1.room_name_label.caption","sourcebytes":[82,117,110,32,116,104,101,32,103,97,109,101,44,32,116,104,101,110,32,112,114,101,115,115,32,34,83,116,97,114,116,34],"value":"Run the game, then press \"Start\""},
+{"hash":43,"name":"tform1.plus_spoil.caption","sourcebytes":[43],"value":"+"},
+{"hash":45,"name":"tform1.minus_spoil1.caption","sourcebytes":[45],"value":"-"},
+{"hash":179882696,"name":"tform1.map_stretch_checkbox.caption","sourcebytes":[83,116,114,101,116,99,104],"value":"Stretch"},
+{"hash":175506234,"name":"tform1.spoils_label.caption","sourcebytes":[83,112,111,105,108,115,58],"value":"Spoils:"},
+{"hash":6676461,"name":"tform1.edit_room_button.caption","sourcebytes":[69,100,105,116,32,82,111,111,109],"value":"Edit Room"},
+{"hash":5941396,"name":"tform1.start_stop_button.caption","sourcebytes":[83,116,97,114,116],"value":"Start"},
+{"hash":86077493,"name":"tform1.gamebox.text","sourcebytes":[77,77,66,78,32,53],"value":"MMBN 5"},
+{"hash":5079946,"name":"tform1.label1.caption","sourcebytes":[71,97,109,101,58],"value":"Game:"},
+{"hash":1726,"name":"tform1.langbox.text","sourcebytes":[101,110],"value":"en"}
+]}

@@ -9,7 +9,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="mmbn5mm"/>
+            <Filename Value="mmbn56mm"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -47,8 +47,8 @@
         <Filename Value="mmbn5m.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="25" Y="5"/>
-        <UsageCount Value="57"/>
+        <CursorPos X="49" Y="20"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -58,10 +58,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="325"/>
-        <CursorPos X="25" Y="346"/>
-        <UsageCount Value="57"/>
+        <TopLine Value="364"/>
+        <CursorPos X="52" Y="411"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -70,21 +69,22 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="128"/>
         <CursorPos Y="152"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\syshelph.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="147"/>
         <CursorPos X="16" Y="161"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="rooms.ini"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="40"/>
-        <CursorPos X="121" Y="53"/>
-        <UsageCount Value="16"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="274"/>
+        <CursorPos X="12" Y="298"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Ini"/>
       </Unit>
@@ -92,128 +92,148 @@
         <Filename Value="mmbn5m.lpi"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="46"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\lcltranslator.pas"/>
+        <UnitName Value="LCLTranslator"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="95"/>
+        <CursorPos Y="95"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\components\lazutils\translations.pas"/>
+        <UnitName Value="Translations"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="738"/>
+        <CursorPos X="54" Y="775"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="31" Column="11"/>
+        <Caret Line="9" Column="34" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="32" Column="11"/>
+        <Caret Line="432" Column="49" TopLine="387"/>
+      </Position>
+      <Position>
+        <Filename Value="mmbn5m.lpr"/>
+        <Caret Line="21" Column="21"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="40" Column="21"/>
+        <Caret Line="435" Column="35" TopLine="408"/>
+      </Position>
+      <Position>
+        <Filename Value="mmbn5m.lpr"/>
+        <Caret Line="13" Column="16"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="168" Column="27" TopLine="128"/>
+        <Caret Line="428" Column="73" TopLine="409"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="170" Column="13" TopLine="130"/>
+        <Caret Line="435" Column="50" TopLine="388"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\components\lazutils\translations.pas"/>
+        <Caret Line="762" Column="128" TopLine="738"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="171" Column="13" TopLine="131"/>
+        <Caret Line="435" Column="44" TopLine="406"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="176" Column="11" TopLine="136"/>
+        <Caret Line="437" Column="54" TopLine="406"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="282" Column="49" TopLine="282"/>
+        <Caret Line="26" Column="92"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="272" Column="72" TopLine="235"/>
+        <Caret Line="414" Column="53" TopLine="390"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="312" Column="88" TopLine="283"/>
+        <Caret Line="412" Column="27" TopLine="387"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="121" Column="7" TopLine="102"/>
+        <Caret Line="211" Column="5" TopLine="165"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="291" Column="84" TopLine="272"/>
+        <Caret Line="409" Column="19" TopLine="399"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="286" Column="14" TopLine="262"/>
+        <Caret Line="175" Column="24" TopLine="151"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="287" Column="47" TopLine="264"/>
+        <Caret Line="9" Column="73"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="289" Column="45" TopLine="265"/>
+        <Caret Line="188" Column="20" TopLine="173"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="291" Column="69" TopLine="268"/>
+        <Caret Line="189" Column="25" TopLine="171"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="300" Column="37" TopLine="275"/>
+        <Caret Line="208" Column="3" TopLine="186"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="268" Column="98" TopLine="235"/>
+        <Caret Line="453" Column="5" TopLine="408"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="344" Column="52" TopLine="315"/>
+        <Caret Line="209" Column="46" TopLine="197"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="383" Column="89" TopLine="351"/>
+        <Caret Line="224" Column="58" TopLine="192"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="281" Column="68" TopLine="259"/>
+        <Caret Line="210" Column="59" TopLine="210"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="358" Column="89" TopLine="333"/>
+        <Caret Line="195" Column="6" TopLine="171"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="136" Column="109" TopLine="108"/>
+        <Caret Line="214" Column="66" TopLine="190"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="398" Column="5" TopLine="351"/>
+        <Caret Line="415" Column="13" TopLine="375"/>
+      </Position>
+      <Position>
+        <Filename Value="rooms.ini"/>
+        <Caret Line="51" Column="40" TopLine="25"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="396" Column="5" TopLine="350"/>
+        <Caret Line="201" Column="82" TopLine="174"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="355" Column="14" TopLine="308"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="371" Column="57" TopLine="350"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="360" Column="141" TopLine="352"/>
+        <Caret Line="265" Column="25" TopLine="241"/>
       </Position>
     </JumpHistory>
     <RunParams>

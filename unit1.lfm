@@ -1,11 +1,12 @@
 object Form1: TForm1
-  Left = 1066
-  Height = 448
-  Top = 323
-  Width = 606
+  Left = 1705
+  Height = 478
+  Top = 548
+  Width = 792
+  Anchors = [akTop]
   Caption = 'MMBN5-6M'
-  ClientHeight = 448
-  ClientWidth = 606
+  ClientHeight = 478
+  ClientWidth = 792
   Font.CharSet = ANSI_CHARSET
   Font.Height = -16
   Font.Name = 'Liberation Mono'
@@ -16,14 +17,13 @@ object Form1: TForm1
   Position = poScreenCenter
   LCLVersion = '2.2.6.0'
   object room_name_label: TLabel
-    AnchorSideLeft.Control = start_stop_button
+    AnchorSideLeft.Control = Splitter2
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 192
+    Left = 231
     Height = 18
     Top = 8
     Width = 320
-    BorderSpacing.Left = 8
     BorderSpacing.Top = 8
     Caption = 'Run the game, then press "Start"'
     Color = clGradientInactiveCaption
@@ -31,18 +31,20 @@ object Form1: TForm1
     Transparent = False
   end
   object map_image: TImage
-    AnchorSideLeft.Control = room_name_label
+    AnchorSideLeft.Control = Splitter2
+    AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = room_name_label
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 192
-    Height = 406
+    Left = 232
+    Height = 436
     Top = 34
-    Width = 406
+    Width = 552
     Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 1
     BorderSpacing.Top = 8
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
@@ -51,153 +53,231 @@ object Form1: TForm1
     Proportional = True
     Stretch = True
   end
-  object start_stop_button: TSpeedButton
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = gamebox
-    AnchorSideTop.Side = asrBottom
-    Left = 8
-    Height = 30
-    Top = 40
-    Width = 176
-    AllowAllUp = True
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    Caption = 'Start'
-    GroupIndex = 1
-    Transparent = False
-    OnClick = start_stop_buttonClick
+  object Splitter1: TSplitter
+    Left = 787
+    Height = 478
+    Top = 0
+    Width = 5
+    Align = alRight
+    ResizeAnchor = akRight
   end
-  object edit_room_button: TButton
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = start_stop_button
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = map_image
-    Left = 8
-    Height = 30
-    Top = 78
-    Width = 176
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    BorderSpacing.Right = 8
-    Caption = 'Edit Room'
-    OnClick = edit_room_buttonClick
-    TabOrder = 0
-  end
-  object spoils_listbox: TListBox
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = spoils_label
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = map_image
-    AnchorSideBottom.Control = plus_spoil
-    Left = 8
-    Height = 250
-    Top = 142
-    Width = 176
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
-    BorderStyle = bsNone
-    Color = clGradientInactiveCaption
-    ItemHeight = 0
-    OnDblClick = spoils_listboxDblClick
+  object Panel1: TPanel
+    Left = 0
+    Height = 478
+    Top = 0
+    Width = 227
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 478
+    ClientWidth = 227
     TabOrder = 1
+    object plus_spoil: TButton
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 40
+      Top = 430
+      Width = 104
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Bottom = 8
+      Caption = '+'
+      OnClick = plus_spoilClick
+      TabOrder = 0
+    end
+    object minus_spoil1: TButton
+      AnchorSideLeft.Control = plus_spoil
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = plus_spoil
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 120
+      Height = 40
+      Top = 430
+      Width = 103
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 8
+      Caption = '-'
+      OnClick = minus_spoil1Click
+      TabOrder = 1
+    end
+    object map_stretch_checkbox: TCheckBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = spoils_listbox
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = plus_spoil
+      Left = 8
+      Height = 22
+      Top = 400
+      Width = 215
+      Anchors = [akLeft, akRight, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 8
+      Caption = 'Stretch'
+      OnChange = map_stretch_checkboxChange
+      TabOrder = 2
+    end
+    object spoils_listbox: TListBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = spoils_label
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = plus_spoil
+      Left = 8
+      Height = 250
+      Top = 142
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      Color = clGradientInactiveCaption
+      ItemHeight = 0
+      OnDblClick = spoils_listboxDblClick
+      TabOrder = 3
+    end
+    object spoils_label: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = edit_room_button
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 18
+      Top = 116
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      Caption = 'Spoils:'
+      ParentColor = False
+    end
+    object edit_room_button: TButton
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = start_stop_button
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 30
+      Top = 78
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      Caption = 'Edit Room'
+      OnClick = edit_room_buttonClick
+      TabOrder = 4
+    end
+    object start_stop_button: TSpeedButton
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = gamebox
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 30
+      Top = 40
+      Width = 215
+      AllowAllUp = True
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      Caption = 'Start'
+      GroupIndex = 1
+      Transparent = False
+      OnClick = start_stop_buttonClick
+    end
+    object gamebox: TComboBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = start_stop_button
+      Left = 66
+      Height = 24
+      Top = 8
+      Width = 157
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 8
+      ItemHeight = 18
+      ItemIndex = 0
+      Items.Strings = (
+        'MMBN 5'
+        'MMBN 6'
+      )
+      OnSelect = gameboxSelect
+      ReadOnly = True
+      Style = csOwnerDrawFixed
+      TabOrder = 5
+      Text = 'MMBN 5'
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = gamebox
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 18
+      Top = 11
+      Width = 50
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 11
+      Caption = 'Game:'
+      ParentColor = False
+    end
   end
-  object spoils_label: TLabel
+  object Splitter2: TSplitter
+    Left = 227
+    Height = 478
+    Top = 0
+    Width = 4
+    OnMoved = Splitter2Moved
+    ResizeStyle = rsLine
+  end
+  object langbox: TComboBox
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = edit_room_button
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = map_image
-    Left = 8
-    Height = 18
-    Top = 116
-    Width = 176
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    BorderSpacing.Right = 8
-    Caption = 'Spoils:'
-    ParentColor = False
-  end
-  object plus_spoil: TButton
-    AnchorSideLeft.Control = Owner
-    AnchorSideBottom.Control = Owner
-    AnchorSideBottom.Side = asrBottom
-    Left = 8
-    Height = 40
-    Top = 400
-    Width = 56
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 8
-    BorderSpacing.Bottom = 8
-    Caption = '+'
-    OnClick = plus_spoilClick
-    TabOrder = 2
-  end
-  object minus_spoil1: TButton
-    AnchorSideLeft.Control = plus_spoil
     AnchorSideLeft.Side = asrBottom
-    AnchorSideRight.Control = map_image
-    AnchorSideBottom.Control = Owner
-    AnchorSideBottom.Side = asrBottom
-    Left = 72
-    Height = 40
-    Top = 400
-    Width = 112
-    Anchors = [akLeft, akRight, akBottom]
-    BorderSpacing.Left = 8
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
-    Caption = '-'
-    OnClick = minus_spoil1Click
-    TabOrder = 3
-  end
-  object map_stretch_checkbox: TCheckBox
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = spoils_listbox
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = map_image
-    AnchorSideBottom.Control = plus_spoil
-    Left = 8
-    Height = 22
-    Top = 370
-    Width = 176
-    Anchors = [akLeft, akRight, akBottom]
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
-    Caption = 'Stretch'
-    OnChange = map_stretch_checkboxChange
-    TabOrder = 4
-  end
-  object gamebox: TComboBox
-    AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
-    AnchorSideRight.Control = start_stop_button
+    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = start_stop_button
-    Left = 8
-    Height = 24
-    Top = 8
-    Width = 176
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 8
-    BorderSpacing.Top = 8
-    BorderSpacing.Bottom = 8
+    Left = 734
+    Height = 26
+    Top = 1
+    Width = 50
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 1
+    BorderSpacing.Right = 8
     ItemHeight = 18
     ItemIndex = 0
     Items.Strings = (
-      'MMBN 5'
-      'MMBN 6'
+      'en'
+      'ru'
     )
-    OnSelect = gameboxSelect
+    OnSelect = langboxSelect
     ReadOnly = True
-    Style = csOwnerDrawFixed
-    TabOrder = 5
-    Text = 'MMBN 5'
+    Style = csDropDownList
+    TabOrder = 3
+    Text = 'en'
   end
   object Timer1: TTimer
     Enabled = False

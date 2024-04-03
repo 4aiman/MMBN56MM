@@ -1,0 +1,107 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tform1.caption
+msgid "MMBN5-6M"
+msgstr ""
+
+#: tform1.edit_room_button.caption
+msgid "Edit Room"
+msgstr "Дать Комнате Имя"
+
+#: tform1.gamebox.text
+msgid "MMBN 5"
+msgstr ""
+
+#: tform1.label1.caption
+msgid "Game:"
+msgstr "Игра:"
+
+#: tform1.map_stretch_checkbox.caption
+msgid "Stretch"
+msgstr "Растянуть карту"
+
+#: tform1.minus_spoil1.caption
+msgid "-"
+msgstr "Удалить"
+
+#: tform1.plus_spoil.caption
+msgid "+"
+msgstr "Добавить"
+
+#: tform1.room_name_label.caption
+msgctxt "tform1.room_name_label.caption"
+msgid "Run the game, then press \"Start\""
+msgstr "Запусти игру, нажми \"Запуск\""
+
+#: tform1.spoils_label.caption
+msgid "Spoils:"
+msgstr "Находки:"
+
+#: tform1.start_stop_button.caption
+msgctxt "tform1.start_stop_button.caption"
+msgid "Start"
+msgstr "Запуск"
+
+#: unit1.adding_item
+msgid "Adding item to Room #"
+msgstr "Новая находка в Комнате №"
+
+#: unit1.app_caption
+msgid "MMBN5-6M: Reading from process ID"
+msgstr "MMBN5-6M: Чтение процесса с идентификатором"
+
+#: unit1.editing_item
+msgid "Editing item in Room #"
+msgstr "Редактирование находки в Комнате №"
+
+#: unit1.editing_room
+msgid "Editing Room #"
+msgstr "Переименование Комнаты №"
+
+#: unit1.enter_item_name
+msgid "Enter item's name"
+msgstr "Введи название находки"
+
+#: unit1.enter_room_name
+msgid "Enter this Room's name"
+msgstr "Введи название Комнаты"
+
+#: unit1.error_game_memory_not_read
+msgid "Error. Game's memory not read."
+msgstr "Ошибка. Память приложения не прочитана."
+
+#: unit1.error_game_not_running
+msgid "Error. Make sure the game's running."
+msgstr "Ошибка. Игра точно запущена?"
+
+#: unit1.error_hotkey_registration_failed
+msgid "HotKey registration failed. You won't be able to press Win+Y to temporarily view map in full screen."
+msgstr "Регистрация горячих клавиш не удалась. Нажимать Win+Y для переключения в полноэкранный режим не выйдет."
+
+#: unit1.error_unable_to_read_game_memory
+msgid "Error. Can't read game's memory."
+msgstr "Ошибка. Чтение памяти приложения невозможно."
+
+#: unit1.room_number
+msgid "Room #"
+msgstr "Комната №"
+
+#: unit1.run_the_game_notice
+msgctxt "unit1.run_the_game_notice"
+msgid "Run the game, then press \"Start\""
+msgstr "Запусти игру, нажми \"Запуск\""
+
+#: unit1.start_button_stop
+msgid "Stop"
+msgstr "Остановка"
+
+#: unit1.start_button_strat
+msgctxt "unit1.start_button_strat"
+msgid "Start"
+msgstr "Запуск"
+
+#: unit1.unknown_room
+msgid "Unknown"
+msgstr "Неизвестно где..."
+

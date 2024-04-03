@@ -6,7 +6,7 @@ interface
 
 uses
 Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-Buttons, Grids, IniFiles, Windows;
+Buttons, Grids, IniFiles, Windows, DefaultTranslator, LCLTranslator, FileUtil;
 
 type
 TWMHotKey = packed record
@@ -22,25 +22,32 @@ type
 { TForm1 }
 
 TForm1 = class ( TForm )
-	gamebox  :TComboBox;
-	map_stretch_checkbox  :TCheckBox;
-	plus_spoil  :TButton;
+	langbox  :TComboBox;
 	edit_room_button  :TButton;
+	gamebox  :TComboBox;
+	Label1   :TLabel;
+	map_stretch_checkbox  :TCheckBox;
 	minus_spoil1  :TButton;
-	spoils_label  :TLabel;
-	spoils_listbox  :TListBox;
+	Panel1   :TPanel;
+	plus_spoil  :TButton;
+	Splitter1  :TSplitter;
 	map_image  :TImage;
 	room_name_label  :TLabel;
+	Splitter2  :TSplitter;
+	spoils_label  :TLabel;
+	spoils_listbox  :TListBox;
 	start_stop_button  :TSpeedButton;
 	Timer1   :TTimer;
 	procedure edit_room_buttonClick ( Sender  :TObject );
 	procedure FormClose ( Sender  :TObject; var CloseAction  :TCloseAction );
 	procedure FormCreate ( Sender  :TObject );
 	procedure gameboxSelect ( Sender  :TObject );
+	procedure langboxSelect ( Sender  :TObject );
 	procedure map_imagePaint ( Sender  :TObject );
 	procedure map_stretch_checkboxChange ( Sender  :TObject );
 	procedure minus_spoil1Click ( Sender  :TObject );
 	procedure plus_spoilClick ( Sender  :TObject );
+	procedure Splitter2Moved ( Sender  :TObject );
 	procedure spoils_listboxDblClick ( Sender  :TObject );
 	procedure start_stop_buttonClick ( Sender  :TObject );
 	procedure Timer1Timer ( Sender  :TObject );
@@ -52,6 +59,25 @@ PROTECTED
 	procedure WMHotKey ( var MSG  :TWMHotKey ); MESSAGE WM_HOTKEY;
 
 end;
+
+
+resourcestring
+ADDING_ITEM  = 'Adding item to Room #';
+ENTER_ITEM_NAME = 'Enter item''s name';
+EDITING_ITEM = 'Editing item in Room #';
+EDITING_ROOM = 'Editing Room #';
+ENTER_ROOM_NAME = 'Enter this Room''s name';
+START_BUTTON_STRAT = 'Start';
+START_BUTTON_STOP = 'Stop';
+APP_CAPTION  = 'MMBN5-6M: Reading from process ID';
+ROOM_NUMBER  = 'Room #';
+RUN_THE_GAME_NOTICE = 'Run the game, then press "Start"';
+ERROR_GAME_NOT_RUNNING = 'Error. Make sure the game''s running.';
+ERROR_GAME_MEMORY_NOT_READ = 'Error. Game''s memory not read.';
+ERROR_UNABLE_TO_READ_GAME_MEMORY = 'Error. Can''t read game''s memory.';
+ERROR_HOTKEY_REGISTRATION_FAILED = 'HotKey registration failed. You won''t be able to press Win+Y to temporarily view map in full screen.';
+UNKNOWN_ROOM = 'Unknown';
+
 
 var
 Form1  :TForm1;
@@ -76,8 +102,7 @@ begin
 
 	while INTEGER ( ContinueLoop ) <> 0 do
 	begin
-		if ( ( UpperCase ( ExtractFileName ( FProcessEntry32.szExeFile ) ) = UpperCase ( ExeFileName ) )
-        OR( UpperCase ( FProcessEntry32.szExeFile ) = UpperCase ( ExeFileName ) ) ) then begin
+		if ( ( UpperCase ( ExtractFileName ( FProcessEntry32.szExeFile ) ) = UpperCase ( ExeFileName ) )   OR( UpperCase ( FProcessEntry32.szExeFile ) = UpperCase ( ExeFileName ) ) ) then begin
 			Result := FProcessEntry32.th32ProcessID;
 			Break;
 		end;
@@ -118,8 +143,8 @@ var
 hProcess  :THandle;
 ROOMS  :TIniFile; // contains room labels
 process_list  :TStrings;
-room   :QWORD = -1; // contains current room 16-bit value
-last_room  :QWORD = -1;
+room   :QWORD = 18446744073709551615; // contains current room 16-bit value
+last_room  :QWORD = 18446744073709551615;
 room_name  :STRING;
 new_room  :bool;
 spoils_list  :STRING;
@@ -138,12 +163,17 @@ is_cyberworld  :BOOLEAN = False;
 var
 x, y, w, h  :INTEGER;
 state  :TWindowState;
+languages  :TStrings;
+current_language  :STRING;
 
 {$R *.lfm}
+
 
 { TForm1 }
 
 procedure TForm1.FormCreate ( Sender  :TObject );
+var
+	i  :INTEGER;
 begin
 	current_game_pointer := mmbn5_pointer;
 	// open ini file and create a list to hold processes
@@ -151,7 +181,18 @@ begin
 	process_list := TStringList.Create ( );
 	spoils_listbox.Height := 0;
 	if NOT RegisterHotKey ( Handle, 111000, MOD_WIN, VK_Y ) then
-		ShowMessage ( 'HotKey registration failed. You won''t be able to press Win+Y to temporarily view map in full screen.' );
+		ShowMessage ( ERROR_HOTKEY_REGISTRATION_FAILED );
+
+	// translations
+	languages := TStringList.Create ( );
+	current_language := ROOMS.ReadString ( 'Settings', 'Language', 'en' );
+	FindAllFiles ( languages, 'po', '*.po', False );
+	for i := 0 to languages.Count -1 do begin
+		languages[i] := languages [i].Replace ( 'po\mmbn56mm.', '' ).Replace ( '.po', '' );
+	end;
+	langbox.Items := languages;
+	langbox.ItemIndex := langbox.Items.IndexOf ( current_language );
+	SetDefaultLang ( current_language, 'po' );
 end;
 
 
@@ -164,6 +205,14 @@ begin
 		current_game_pointer := mmbn6_pointer;
 	end;
 	ROOMS.WriteString ( 'Pointers', current_game, IntToStr ( current_game_pointer ) );
+end;
+
+
+procedure TForm1.langboxSelect ( Sender  :TObject );
+begin
+	current_language := langbox.Items [langbox.ItemIndex];
+	SetDefaultLang ( current_language, 'po' );
+	ROOMS.WriteString ( 'Settings', 'Language', current_language );
 end;
 
 
@@ -182,7 +231,7 @@ end;
 
 procedure TForm1.minus_spoil1Click ( Sender  :TObject );
 var
-	Txt  :STRING;
+	Txt  :STRING = '';
 	i  :INTEGER;
 begin
 	if ( spoils_listbox.ItemIndex > -1 ) then begin
@@ -205,11 +254,11 @@ end;
 
 procedure TForm1.plus_spoilClick ( Sender  :TObject );
 var
-	new_spoil_name  :STRING;
-	Txt  :STRING;
+	new_spoil_name  :STRING = '';
+	Txt  :STRING = '';
 	i  :INTEGER;
 begin
-	if InputQuery ( 'Adding item to Room #' + IntToStr ( room ), 'Enter item''s name', new_spoil_name ) then begin
+	if InputQuery ( ADDING_ITEM + IntToStr ( room ), ENTER_ITEM_NAME, new_spoil_name ) then begin
 		spoils_listbox.Items.Add ( new_spoil_name );
 		for i := 0 to spoils_listbox.Items.Count - 1 do begin
 			if i < spoils_listbox.Items.Count - 1 then
@@ -227,16 +276,22 @@ begin
 end;
 
 
+procedure TForm1.Splitter2Moved ( Sender  :TObject );
+begin
+	plus_spoil.Width := Round ( Panel1.Width/2 ) -12;
+end;
+
+
 procedure TForm1.spoils_listboxDblClick ( Sender  :TObject );
 var
 	new_spoil_name  :STRING;
 var
-	Txt  :STRING;
+	Txt  :STRING = '';
 	i  :INTEGER;
 begin
 	if ( spoils_listbox.ItemIndex > -1 ) then begin
 		new_spoil_name := spoils_listbox.Items [spoils_listbox.ItemIndex];
-		if InputQuery ( 'Editing item in Room #' + IntToStr ( room ), 'Enter item''s name', new_spoil_name ) then begin
+		if InputQuery ( EDITING_ITEM + IntToStr ( room ), ENTER_ITEM_NAME, new_spoil_name ) then begin
 			spoils_listbox.Items[spoils_listbox.ItemIndex] := new_spoil_name;
 			for i := 0 to spoils_listbox.Items.Count - 1 do begin
 				if i < spoils_listbox.Items.Count - 1 then
@@ -262,22 +317,22 @@ var
 
 begin
 	if start_stop_button.Down = False then begin
-		start_stop_button.Caption := 'Start';
+		start_stop_button.Caption := START_BUTTON_STRAT;
 		Timer1.Enabled := False;
 		CloseHandle ( hProcess );
-		room_name_label.Caption := 'Run the game, then press "Start"';
+		room_name_label.Caption := RUN_THE_GAME_NOTICE;
 	end else begin
-		start_stop_button.Caption := 'Stop';
+		start_stop_button.Caption := START_BUTTON_STOP;
 		ListRunningProcesses ( process_list );
 		for i := 0 to process_list.Count - 1 do begin
 			if ( process_list [i] = 'MMBN_LC2.exe' ) then begin
 				ProcID  := FindProcessID ( process_list [i] );
 				hProcess := OpenProcess ( PROCESS_VM_READ, False, ProcID );
-				Caption := 'MMBN5-6M: Reading from process ID ' + IntToStr ( ProcID );
+				Caption := APP_CAPTION + ' ' + IntToStr ( ProcID );
 				Timer1.Enabled := True;
 				break;
 			end else begin
-				room_name_label.Caption := 'Error. Run the game.';
+				room_name_label.Caption := ERROR_GAME_NOT_RUNNING;
 			end;
 		end;
 	end;
@@ -307,8 +362,8 @@ begin
 						room_name_label.Caption := room_name;
 					end else begin
 						room := SMALLINT ( room ); // - 844424930459648;
-						room_name := ROOMS.ReadString ( 'Rooms ' + current_game, IntToStr ( room ), 'Unknown' );
-						room_name_label.Caption := 'Room #' + IntToStr ( room ) + ': ' + room_name;
+						room_name := ROOMS.ReadString ( 'Rooms ' + current_game, IntToStr ( room ), UNKNOWN_ROOM );
+						room_name_label.Caption := ROOM_NUMBER + IntToStr ( room ) + ': ' + room_name;
 					end;
 
 					spoils_list := ROOMS.ReadString ( 'Spoils ' + current_game, IntToStr ( room ), '' );
@@ -325,11 +380,11 @@ begin
 					end;
 				end;
 			end else begin
-				room_name_label.Caption := 'Error. Make sure the game is running.';
+				room_name_label.Caption := ERROR_GAME_MEMORY_NOT_READ;
 			end;
 		except
 			on edit_room_button  :Exception do
-				room_name_label.Caption := 'Error. Can''t read game''s memory.';
+				room_name_label.Caption := ERROR_UNABLE_TO_READ_GAME_MEMORY;
 		end;
 	end;
 
@@ -338,12 +393,12 @@ end;
 
 procedure TForm1.edit_room_buttonClick ( Sender  :TObject );
 var
-	new_room_name  :STRING;
+	new_room_name  :STRING = '';
 begin
 	new_room_name := room_name;
-	if InputQuery ( 'Editing Room # ' + IntToStr ( room ), 'Enter this Room''s name', new_room_name ) then begin
+	if InputQuery ( EDITING_ROOM + ' ' + IntToStr ( room ), ENTER_ROOM_NAME, new_room_name ) then begin
 		ROOMS.WriteString ( 'Rooms ' + current_game, IntToStr ( room ), new_room_name );
-        last_room := -1;
+		last_room := 18446744073709551615;
 	end;
 end;
 
@@ -358,6 +413,7 @@ begin
 	// free additionally created objects
 	ROOMS.Free;
 	process_list.Free;
+	languages.Free;
 	UnregisterHotKey ( Handle, 111000 );
 end;
 
@@ -396,5 +452,11 @@ begin
 	RegisterHotKey ( Handle, 111000, MOD_WIN, VK_Y );
 
 end;
+
+
+initialization
+
+
+SetDefaultLang ( 'en', 'po' );
 
 end.
