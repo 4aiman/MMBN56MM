@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 1705
+  Left = 821
   Height = 478
-  Top = 548
+  Top = 472
   Width = 792
   Anchors = [akTop]
   Caption = 'MMBN5-6M'
@@ -15,7 +15,7 @@ object Form1: TForm1
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object room_name_label: TLabel
     AnchorSideLeft.Control = Splitter2
     AnchorSideLeft.Side = asrBottom
@@ -83,8 +83,8 @@ object Form1: TForm1
       BorderSpacing.Left = 8
       BorderSpacing.Bottom = 8
       Caption = '+'
-      OnClick = plus_spoilClick
       TabOrder = 0
+      OnClick = plus_spoilClick
     end
     object minus_spoil1: TButton
       AnchorSideLeft.Control = plus_spoil
@@ -103,8 +103,8 @@ object Form1: TForm1
       BorderSpacing.Right = 4
       BorderSpacing.Bottom = 8
       Caption = '-'
-      OnClick = minus_spoil1Click
       TabOrder = 1
+      OnClick = minus_spoil1Click
     end
     object map_stretch_checkbox: TCheckBox
       AnchorSideLeft.Control = Panel1
@@ -123,8 +123,8 @@ object Form1: TForm1
       BorderSpacing.Right = 4
       BorderSpacing.Bottom = 8
       Caption = 'Stretch'
-      OnChange = map_stretch_checkboxChange
       TabOrder = 2
+      OnChange = map_stretch_checkboxChange
     end
     object spoils_listbox: TListBox
       AnchorSideLeft.Control = Panel1
@@ -145,8 +145,8 @@ object Form1: TForm1
       BorderStyle = bsNone
       Color = clGradientInactiveCaption
       ItemHeight = 0
-      OnDblClick = spoils_listboxDblClick
       TabOrder = 3
+      OnDblClick = spoils_listboxDblClick
     end
     object spoils_label: TLabel
       AnchorSideLeft.Control = Panel1
@@ -180,8 +180,8 @@ object Form1: TForm1
       BorderSpacing.Top = 8
       BorderSpacing.Right = 4
       Caption = 'Edit Room'
-      OnClick = edit_room_buttonClick
       TabOrder = 4
+      OnClick = edit_room_buttonClick
     end
     object start_stop_button: TSpeedButton
       AnchorSideLeft.Control = Panel1
@@ -225,11 +225,11 @@ object Form1: TForm1
         'MMBN 5'
         'MMBN 6'
       )
-      OnSelect = gameboxSelect
       ReadOnly = True
       Style = csOwnerDrawFixed
       TabOrder = 5
       Text = 'MMBN 5'
+      OnSelect = gameboxSelect
     end
     object Label1: TLabel
       AnchorSideLeft.Control = Panel1
@@ -273,11 +273,11 @@ object Form1: TForm1
       'en'
       'ru'
     )
-    OnSelect = langboxSelect
     ReadOnly = True
     Style = csDropDownList
     TabOrder = 3
     Text = 'en'
+    OnSelect = langboxSelect
   end
   object Timer1: TTimer
     Enabled = False

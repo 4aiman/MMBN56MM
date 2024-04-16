@@ -58,6 +58,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="364"/>
         <CursorPos X="52" Y="411"/>
         <UsageCount Value="65"/>
@@ -80,10 +81,9 @@
       </Unit>
       <Unit>
         <Filename Value="rooms.ini"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <TopLine Value="274"/>
-        <CursorPos X="12" Y="298"/>
+        <CursorPos X="52" Y="298"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Ini"/>
